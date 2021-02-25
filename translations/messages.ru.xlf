@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="ru" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="IB.qAAt" resname="reg.title">
+        <source>reg.title</source>
+        <target>Регистрация</target>
+      </trans-unit>
+      <trans-unit id="a340aSQ" resname="reg.name">
+        <source>reg.name</source>
+        <target>Имя</target>
+      </trans-unit>
+      <trans-unit id="RVadpX9" resname="phone">
+        <source>phone</source>
+        <target>Телефон</target>
+      </trans-unit>
+      <trans-unit id="giREF.l" resname="email">
+        <source>email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="XohImNo" resname="password">
+        <source>password</source>
+        <target>Пароль</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN" resname="repeatPassword">
+        <source>repeatPassword</source>
+        <target>Повторите пароль</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN2" resname="reg.submit">
+        <source>reg.submit</source>
+        <target>Регистрация</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

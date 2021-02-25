@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}reg.title{% endtrans %}{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>{% trans %}reg.title{% endtrans %}</h1><hr>
+
+    {{ form_start(registrationForm) }}
+    {{ form_widget(registrationForm) }}
+    {{ form_end(registrationForm) }}
+{% endblock %}

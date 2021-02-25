@@ -8,14 +8,18 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
+    public const STATUS_NEW = 1;
+
     public const ROLE_USER = 'ROLE_USER';
 
     /**
@@ -26,7 +30,7 @@ class User implements UserInterface
     private int $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      */
     private string $name;
 
@@ -79,6 +83,11 @@ class User implements UserInterface
      */
     private Collection $shops;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
     public function __construct()
     {
         $this->updatedAt = new DateTimeImmutable();
@@ -102,6 +111,7 @@ class User implements UserInterface
 
     /**
      * @param string $name
+     * @return $this
      */
     public function setName(string $name): self
     {
@@ -309,6 +319,18 @@ class User implements UserInterface
         if ($this->shops->removeElement($shop)) {
             $shop->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
