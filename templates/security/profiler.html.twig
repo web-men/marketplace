@@ -1,0 +1,24 @@
+{% extends 'security/baseProfiler.html.twig' %}
+
+{% block title %}{% trans %}user.profile{% endtrans %}{% endblock %}
+
+{% block contentTitle %}
+    <h1>{% trans %}user.profile{% endtrans %}</h1>
+{% endblock %}
+{% block content %}
+    <div class="row g-0">
+        <div class="col-md-3" style="margin-top: 15px">
+            <img style="width: 100%;" src="https://www.soundandvision.ee/wp-content/uploads/2019/05/profile-img.jpg" alt="...">
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><b>{% trans %}name {% endtrans %}</b>:  {{ user.name }}</li>
+                    <li class="list-group-item"><b>{% trans %}email{% endtrans %}</b>: {{ user.email }}</li>
+                    <li class="list-group-item"><b>{% trans %}phone{% endtrans %}</b>: {{ user.phone }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

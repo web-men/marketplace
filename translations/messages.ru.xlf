@@ -9,8 +9,8 @@
         <source>reg.title</source>
         <target>Регистрация</target>
       </trans-unit>
-      <trans-unit id="a340aSQ" resname="reg.name">
-        <source>reg.name</source>
+      <trans-unit id="a340aSQ" resname="name">
+        <source>name</source>
         <target>Имя</target>
       </trans-unit>
       <trans-unit id="RVadpX9" resname="phone">
@@ -32,6 +32,10 @@
       <trans-unit id="qmpYFJN2" resname="reg.submit">
         <source>reg.submit</source>
         <target>Регистрация</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN3" resname="user.profile">
+        <source>user.profile</source>
+        <target>Профиль пользователя</target>
       </trans-unit>
     </body>
   </file>

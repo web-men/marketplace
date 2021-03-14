@@ -26,7 +26,7 @@ class RegistrationFormType extends AbstractType
                 'name',
                 TextType::class,
                 [
-                    'label' => 'reg.name',
+                    'label' => 'name',
                 ]
             )
             ->add(
