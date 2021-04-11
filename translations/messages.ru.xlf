@@ -37,6 +37,38 @@
         <source>user.profile</source>
         <target>Профиль пользователя</target>
       </trans-unit>
+      <trans-unit id="qmpYFJN4" resname="shop.add">
+        <source>shop.add</source>
+        <target>Добавить магазин</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN5" resname="shop.add.name">
+        <source>shop.add.name</source>
+        <target>Название магазина</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN6" resname="shop.add.desc">
+        <source>shop.add.desc</source>
+        <target>Описание магазина</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN7" resname="city">
+        <source>city</source>
+        <target>Город</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN8" resname="street">
+        <source>street</source>
+        <target>Улица</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN9" resname="house">
+        <source>house</source>
+        <target>Дом</target>
+      </trans-unit>
+      <trans-unit id="qmpYFJN10" resname="postal_code">
+        <source>postal_code</source>
+        <target>Почтовый индекс</target>
+      </trans-unit>
+      <trans-unit id="0">
+        <source>address.add</source>
+        <target>Добавить адрес</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

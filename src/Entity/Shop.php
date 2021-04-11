@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ShopRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Shop
 {
+    public const STATUS_NEW = 1;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -53,6 +56,8 @@ class Shop
     public function __construct()
     {
         $this->user = new ArrayCollection();
+        $this->setCreatedAt(new DateTimeImmutable());
+        $this->setUpdatedAt(new DateTimeImmutable());
     }
 
     public function getId(): ?int
@@ -132,6 +137,7 @@ class Shop
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
+            $user->addShop($this);
         }
 
         return $this;
