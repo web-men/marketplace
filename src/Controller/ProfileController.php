@@ -16,6 +16,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProfileController extends AbstractController
 {
+    private const FLASH_INFO = 'info';
+
     #[Route('/user/profile', name: '_profile')]
     public function profile(): Response
     {
@@ -37,6 +39,7 @@ class ProfileController extends AbstractController
             $em->persist($shop);
             $em->flush();
 
+            $this->addFlash(self::FLASH_INFO, 'Магазин добавлен');
             return $this->redirectToRoute('_profile');
         }
 
@@ -62,6 +65,7 @@ class ProfileController extends AbstractController
             $em->persist($address);
             $em->flush();
 
+            $this->addFlash(self::FLASH_INFO, 'Адрес добавлен');
             return $this->redirectToRoute('_profile');
         }
 

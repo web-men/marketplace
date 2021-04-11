@@ -80,7 +80,13 @@
                     </ul>
                 </div>
             </nav>
-            <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+            <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 position-relative"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                {% for info in app.flashes('info') %}
+                <div style="width: 95%" class="alert alert-warning alert-dismissible fade show position-absolute" role="alert">
+                    {{ info }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     {% block contentTitle %}{% endblock %}
                 </div>
