@@ -69,6 +69,14 @@
         <source>address.add</source>
         <target>Добавить адрес</target>
       </trans-unit>
+      <trans-unit id="1">
+        <source>shop.added</source>
+        <target>Магазин добавлен</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>address.added</source>
+        <target>Адрес добавлен</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

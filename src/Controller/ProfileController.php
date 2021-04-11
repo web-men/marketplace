@@ -39,7 +39,7 @@ class ProfileController extends AbstractController
             $em->persist($shop);
             $em->flush();
 
-            $this->addFlash(self::FLASH_INFO, 'Магазин добавлен');
+            $this->addFlash(self::FLASH_INFO, $t->trans('shop.added'));
             return $this->redirectToRoute('_profile');
         }
 
@@ -65,7 +65,7 @@ class ProfileController extends AbstractController
             $em->persist($address);
             $em->flush();
 
-            $this->addFlash(self::FLASH_INFO, 'Адрес добавлен');
+            $this->addFlash(self::FLASH_INFO, $t->trans('address.added'));
             return $this->redirectToRoute('_profile');
         }
 
