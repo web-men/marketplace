@@ -39,6 +39,41 @@ class ProfileController extends AbstractController
         return $this->render('profile/viewShop.html.twig', ['shop' => $shop]);
     }
 
+    #[Route('/user/deleteShop/{id<\d+>}', name: '_profile_deleteShop')]
+    public function deleteShop(Shop $shop, EntityManagerInterface $em): Response
+    {
+        $em->remove($shop);
+        $em->flush();
+
+        return $this->redirectToRoute('_profile');
+    }
+
+    #[Route('/user/editShop/{id<\d+>}', name: '_profile_editShop')]
+    public function editShop(Request $request, Shop $shop, EntityManagerInterface $em, TranslatorInterface $t): Response
+    {
+        $form = $this->createForm(AddShopFormType::class, $shop);
+        $form->handleRequest($request);
+
+        $user = $this->getUser();
+
+        if ($user instanceof User && $form->isSubmitted() && $form->isValid()) {
+            $shop->addUser($user);
+            $shop->setStatus($shop::STATUS_NEW);
+            $em->persist($shop);
+            $em->flush();
+
+            $this->addFlash(self::FLASH_INFO, $t->trans('shop.added'));
+            return $this->redirectToRoute('_profile');
+        }
+
+        return $this->render('profile/form.html.twig',
+            [
+                'contentTitle' => $t->trans('shop.add'),
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
     #[Route('/user/addShop', name: '_profile_addShop')]
     public function addShop(Request $request, EntityManagerInterface $em, TranslatorInterface $t): Response
     {
