@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\AddAddressFormType;
 use App\Form\AddShopFormType;
+use App\Form\CategoryFormType;
+use App\Form\ProductFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -122,6 +126,56 @@ class ProfileController extends AbstractController
         return $this->render('profile/form.html.twig',
             [
                 'contentTitle' => $t->trans('address.add'),
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    #[Route('/user/addCategory', name: '_profile_addCategory')]
+    public function addCategory(Request $request, EntityManagerInterface $em, TranslatorInterface $t): Response
+    {
+        $category = new Category();
+        $form = $this->createForm(CategoryFormType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($category);
+            $em->flush();
+
+            $this->addFlash(self::FLASH_INFO, $t->trans('category.added'));
+            return $this->redirectToRoute('_profile');
+        }
+
+        return $this->render('profile/form.html.twig',
+            [
+                'contentTitle' => $t->trans('category.add'),
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    #[Route('/user/addProduct/{shopId<\d+>}', name: '_profile_addProduct')]
+    public function addProduct(Request $request, EntityManagerInterface $em, TranslatorInterface $t, int $shopId): Response
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductFormType::class, $product);
+
+        $form->handleRequest($request);
+
+        $shop = $em->find(Shop::class, $shopId);
+        if ($shop instanceof Shop && $form->isSubmitted() && $form->isValid()) {
+            $product->setShop($shop);
+            $em->persist($product);
+            $em->flush();
+
+            $this->addFlash(self::FLASH_INFO, $t->trans('product.added'));
+            return $this->redirectToRoute('_profile_viewShop', ['id' => $shopId]);
+        }
+
+        return $this->render('profile/form.html.twig',
+            [
+                'contentTitle' => $t->trans('product.add'),
                 'form' => $form->createView(),
             ]
         );

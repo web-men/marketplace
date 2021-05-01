@@ -85,6 +85,38 @@
         <source>shop</source>
         <target>Магазин</target>
       </trans-unit>
+      <trans-unit id="5">
+        <source>category.added</source>
+        <target>Категория добавлена</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>category.add</source>
+        <target>Добавить категорию</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>category.name</source>
+        <target>Название категории</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>category.parent</source>
+        <target>Предыдущий уровень категории</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>product.added</source>
+        <target>Товар добавлен</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>product.add</source>
+        <target>Добавить товар</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>product.description</source>
+        <target>Описание товара</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>product.name</source>
+        <target>Название товара</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
