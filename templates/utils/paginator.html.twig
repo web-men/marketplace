@@ -1,0 +1,60 @@
+{% if p.hasToPaginate %}
+    {# Для формирования ссылки #}
+    {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+    {# ссылки на страницы #}
+    <ul class="pagination justify-content-center">
+
+        {# если есть предыдущая страница то переходим на неё #}
+        {% if p.hasPreviousPage %}
+            <li class="page-item">
+                <a class="page-link" href="{{ currentPath }}?page={{ p.previousPage }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% else %}
+            {# если нет то дисейблим #}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {# Лимит для вывода количества страниц #}
+        {% set limit = 5 %}
+        {# Если текущая страница больше лимита то сдвигаем на лимит #}
+        {% set fromPage = p.currentPage > limit ? p.currentPage - limit : 1 %}
+        {# Если не больше максимальной страницы то прибовляем ещё лимит #}
+        {% set toPage = p.lastPage - p.currentPage >= limit ? p.currentPage + limit : p.lastPage %}
+        {% for i in fromPage..toPage %}
+            {% if i == p.currentPage %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ i }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ currentPath }}?page={{ i }}">
+                        {{ i }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {# если есть следующая страница то переходим на неё #}
+        {% if p.hasNextPage %}
+            <li class="page-item">
+                <a class="page-link" href="{{ currentPath }}?page={{ p.nextPage }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% else %}
+            {# если нет то дисейблим #}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+
+{% endif %}

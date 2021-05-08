@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\Shop;
+use App\Utils\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +19,16 @@ class ProductRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
+    }
+
+    final public function getListByShop(Shop $shop, int $page): Paginator
+    {
+        $qb = $this->createQueryBuilder('product')
+            ->orderBy('product.createdAt', 'DESC')
+            ->where('product.shop=:shop')
+            ->setParameter('shop', $shop);
+
+        return (new Paginator($qb))->pagination($page);
     }
 
     // /**

@@ -5,5 +5,22 @@
     <option name="directoryToWeb" value="public" />
     <option name="pluginEnabled" value="true" />
     <option name="twigBundleNamespaceSupport" value="false" />
+    <option name="profilerLocalEnabled" value="true" />
+    <option name="profilerLocalUrl" value="http://site.local" />
+    <option name="profilerCsvPath" value="var/cache/dev/profiler/index.csv" />
+    <option name="lastServiceGeneratorLanguage" value="yaml" />
+    <option name="containerFiles">
+      <list>
+        <container_file path="var/cache/dev/App_KernelDevDebugContainer.xml" />
+      </list>
+    </option>
+    <option name="routingFiles">
+      <list>
+        <routing_file path="var/cache/dev/url_generating_routes.php" />
+        <routing_file path="var/cache/dev/App_KernelDevDebugContainer.preload.php" />
+        <routing_file path="var/cache/dev/App_KernelDevDebugContainer.php" />
+        <routing_file path="var/cache/dev/url_matching_routes.php" />
+      </list>
+    </option>
   </component>
 </project>

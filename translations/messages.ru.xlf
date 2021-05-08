@@ -117,6 +117,10 @@
         <source>product.name</source>
         <target>Название товара</target>
       </trans-unit>
+      <trans-unit id="13">
+        <source>product.detail.read</source>
+        <target>Подробнее о товаре</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
