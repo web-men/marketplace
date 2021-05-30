@@ -20,6 +20,11 @@ class Img
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private string $url;
 
     /**
@@ -103,6 +108,25 @@ class Img
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name): Img
+    {
+        $this->name = $name;
 
         return $this;
     }
