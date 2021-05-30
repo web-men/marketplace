@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,10 +53,16 @@ class Product
      */
     private DateTimeInterface $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ImgToProduct::class, mappedBy="productId")
+     */
+    private ArrayCollection $images;
+
     public function __construct()
     {
         $this->setUpdatedAt(new DateTimeImmutable());
         $this->setCreatedAt(new DateTimeImmutable());
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +138,36 @@ class Product
     public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(ImgToProduct $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImgToProduct $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
+            }
+        }
 
         return $this;
     }
