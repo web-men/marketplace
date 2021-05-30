@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Form\Type\Dropzone\DropzoneType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,6 +25,14 @@ class ProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('images', DropzoneType::class, [
+                'label' => 'img.add',
+                'attr' => [
+                    //Уникальный id нужен будет для загрузки изоброжений
+                    'id' => 'img-product'
+                ],
+                'maxFiles' => 3,
+            ])
             ->add('name', TextType::class, [
                 'label' => 'product.name',
             ])

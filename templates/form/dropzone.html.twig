@@ -1,0 +1,9 @@
+{% block dropzone_widget -%}
+    {{- block('form_widget') -}}
+    <link href="{{ asset('statics/dropzone-5.7.0/dist/basic.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('statics/dropzone-5.7.0/dist/dropzone.css') }}" type="text/css" rel="stylesheet" />
+
+    <script src="{{ asset('statics/dropzone-5.7.0/dist/dropzone.js') }}"></script>
+
+
+{% endblock %}

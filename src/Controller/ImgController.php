@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Img;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -35,6 +36,7 @@ class ImgController extends AbstractController
             $mime = $fileUpload->getMimeType();
 
             $img = (new Img())
+                ->setCreatedAt(new DateTimeImmutable())
                 ->setName($originalName)
                 ->setMime($mime)
                 ->setSize($size)

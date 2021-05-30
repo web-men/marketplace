@@ -9,14 +9,13 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class DropzoneTransformer implements DataTransformerInterface
 {
     public function __construct(
-        private ImgRepository $imgRepository,
-        private bool $once
+        private ImgRepository $imgRepository
     ) {
     }
 
     public function transform(mixed $value)
     {
-        dd($value);
+        //dd($value);
     }
 
     public function reverseTransform($value)

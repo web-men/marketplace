@@ -54,9 +54,9 @@ class Product
     private DateTimeInterface $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=ImgToProduct::class, mappedBy="productId")
+     * @ORM\OneToMany(targetEntity=ImgToProduct::class, mappedBy="product")
      */
-    private ArrayCollection $images;
+    private Collection $images;
 
     public function __construct()
     {
