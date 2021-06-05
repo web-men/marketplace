@@ -65,7 +65,7 @@ class ImgController extends AbstractController
     public function load(
         Img $img
     ): Response {
-        $this->json(
+        return $this->json(
             [
                 'success' => true,
                 'data' => [
@@ -89,7 +89,7 @@ class ImgController extends AbstractController
         $em->remove($img);
         $filesystem->remove($path);
 
-        $this->json(
+        return $this->json(
             [
                 'success' => true
             ]

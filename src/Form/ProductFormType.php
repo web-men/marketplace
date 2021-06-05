@@ -29,9 +29,11 @@ class ProductFormType extends AbstractType
                 'label' => 'img.add',
                 'attr' => [
                     //Уникальный id нужен будет для загрузки изоброжений
-                    'id' => 'img-product'
+                    'id' => 'imgProduct'
                 ],
                 'maxFiles' => 3,
+                'addRemoveLinks' => true,
+                'mapped' => false,
             ])
             ->add('name', TextType::class, [
                 'label' => 'product.name',

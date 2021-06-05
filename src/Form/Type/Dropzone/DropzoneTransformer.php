@@ -18,8 +18,8 @@ class DropzoneTransformer implements DataTransformerInterface
         //dd($value);
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): array
     {
-        dd($value);
+        return $this->imgRepository->findBy(['id' => $value['dropzone']]);
     }
 }

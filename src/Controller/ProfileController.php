@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Entity\Category;
+use App\Entity\ImgToProduct;
 use App\Entity\Product;
 use App\Entity\Shop;
 use App\Entity\User;
@@ -172,6 +173,14 @@ class ProfileController extends AbstractController
         $shop = $em->find(Shop::class, $shopId);
         if ($shop instanceof Shop && $form->isSubmitted() && $form->isValid()) {
             $product->setShop($shop);
+            foreach ($form['images']->getData() as $img) {
+                $imgToProduct = (new ImgToProduct())
+                    ->setImg($img)
+                    ->setProduct($product);
+                $em->persist($imgToProduct);
+                $product->addImage($imgToProduct);
+            }
+
             $em->persist($product);
             $em->flush();
 
