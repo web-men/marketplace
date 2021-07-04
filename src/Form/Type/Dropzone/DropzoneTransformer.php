@@ -4,7 +4,6 @@ namespace App\Form\Type\Dropzone;
 
 use App\Repository\ImgRepository;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class DropzoneTransformer implements DataTransformerInterface
 {
