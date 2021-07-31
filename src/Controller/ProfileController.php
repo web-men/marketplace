@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Entity\Category;
 use App\Entity\ImgToProduct;
 use App\Entity\Product;
+use App\Entity\ProductOption;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\AddAddressFormType;
@@ -173,6 +174,16 @@ class ProfileController extends AbstractController
         $shop = $em->find(Shop::class, $shopId);
         if ($shop instanceof Shop && $form->isSubmitted() && $form->isValid()) {
             $product->setShop($shop);
+            foreach ($form['options']->getData() as $option) {
+                if($option instanceof ProductOption) {
+                    dd($option->getImg());
+                    $option->setProduct($product);
+                    $productPrice = $option->getProductPrice();
+                    $productPrice->setProduct($product);
+                    $em->persist($productPrice);
+                    $em->persist($option);
+                }
+            }
             foreach ($form['images']->getData() as $img) {
                 $imgToProduct = (new ImgToProduct())
                     ->setImg($img)

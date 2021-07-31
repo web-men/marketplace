@@ -58,11 +58,25 @@ class Product
      */
     private Collection $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductOption::class, mappedBy="product")
+     */
+    private Collection $options;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ProductCharacteristic::class, mappedBy="product")
+     */
+    private Collection $characteristics;
+
     public function __construct()
     {
         $this->setUpdatedAt(new DateTimeImmutable());
         $this->setCreatedAt(new DateTimeImmutable());
         $this->images = new ArrayCollection();
+        $this->characteristics = new ArrayCollection();
+        $this->characteristics->add(new ProductCharacteristic());
+        $this->options = new ArrayCollection();
+        $this->options->add(new ProductOption());
     }
 
     public function getId(): ?int
@@ -148,6 +162,46 @@ class Product
     public function getImages(): Collection
     {
         return $this->images;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(ProductOption $option): self
+    {
+        if (!$this->options->contains($option)) {
+            $this->options[] = $option;
+            $option->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCharacteristics(): Collection
+    {
+        return $this->characteristics;
+    }
+
+    /**
+     * @param ProductCharacteristic $productCharacteristic
+     * @return $this
+     */
+    public function addCharacteristics(ProductCharacteristic $productCharacteristic): self
+    {
+        if (!$this->characteristics->contains($productCharacteristic)) {
+            $this->characteristics[] = $productCharacteristic;
+            $productCharacteristic->setProduct($this);
+        }
+
+        return $this;
     }
 
     public function addImage(ImgToProduct $image): self

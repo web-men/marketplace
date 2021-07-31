@@ -125,6 +125,34 @@
         <source>img.add</source>
         <target>Изображение</target>
       </trans-unit>
+      <trans-unit id="15">
+        <source>product.options</source>
+        <target>Опции по товару</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>product.count</source>
+        <target>Количество товаров на складе</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>price</source>
+        <target>Цена</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>discountedPrice</source>
+        <target>Цена со скидкой</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>product.characteristic</source>
+        <target>Характеристики товара</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>characteristic.name</source>
+        <target>Название характеристики</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>characteristic.value</source>
+        <target>Значение характеристики</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
