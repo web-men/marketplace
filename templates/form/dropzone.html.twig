@@ -1,52 +1,49 @@
 {% block dropzone_widget -%}
     {{- block('form_widget') -}}
-    <link href="{{ asset('statics/dropzone-5.7.0/dist/basic.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="{{ asset('statics/dropzone-5.7.0/dist/dropzone.css') }}" type="text/css" rel="stylesheet"/>
-
-    <script src="{{ asset('statics/dropzone-5.7.0/dist/dropzone.js') }}"></script>
-
     <script>
-        let dropzoneId = '{{ id|default(0) }}Dropzone';
+        $(function () {
+            let dropzoneId = '{{ id|default(0) }}Dropzone';
 
-        function getHtml(id) {
-            return `<input type="hidden" name="{{ formName }}[{{ name|default(null) }}][dropzone][]" value="${id}">`;
-        }
-
-        Dropzone['options'][dropzoneId] = {
-            dictDefaultMessage: "Перетащи изображения или нажми для загрузки",
-            dictRemoveFile: 'Удалить',
-            addRemoveLinks: {{ addRemoveLinks|default(false) }},
-            resizeWidth: {{ resizeWidth|default(0) }},
-            resizeHeight: {{ resizeHeight|default(0) }},
-            maxFiles: {{ maxFiles|default(1) }},
-            accept: function (file, done, rejected) {
-                if (file.type !== 'image/png') {
-                    alert("Вы можете загрузить только PNG файлы");
-                    this.removeFile(file);
-                    return;
-                }
-
-                done();
-            },
-            removedfile: function (file) {
-                if (file.id) {
-                    $.get(`/img/delete/${file.id}`)
-                }
-                file.previewElement.remove();
-            },
-            init: function () {
-                console.log('init');
-
-                this.on('success', function (file, result) {
-                    if (result.success) {
-                        let addHtml = getHtml(result.id);
-
-                        file.id = result.id;
-                        $('form').append(addHtml);
-                    }
-                });
+            function getHtml(id) {
+                return `<input type="hidden" name="{{ formName }}[{{ name|default(null) }}][dropzone][]" value="${id}">`;
             }
-        }
+
+            Dropzone['options'][dropzoneId] = {
+                dictDefaultMessage: "Перетащи изображения или нажми для загрузки",
+                dictRemoveFile: 'Удалить',
+                addRemoveLinks: {{ addRemoveLinks|default(false) }},
+                resizeWidth: {{ resizeWidth|default(0) }},
+                resizeHeight: {{ resizeHeight|default(0) }},
+                maxFiles: {{ maxFiles|default(1) }},
+                accept: function (file, done, rejected) {
+                    if (file.type !== 'image/png') {
+                        alert("Вы можете загрузить только PNG файлы");
+                        this.removeFile(file);
+                        return;
+                    }
+
+                    done();
+                },
+                removedfile: function (file) {
+                    if (file.id) {
+                        $.get(`/img/delete/${file.id}`)
+                    }
+                    file.previewElement.remove();
+                },
+                init: function () {
+                    console.log('init');
+
+                    this.on('success', function (file, result) {
+                        if (result.success) {
+                            let addHtml = getHtml(result.id);
+
+                            file.id = result.id;
+                            $('form').append(addHtml);
+                        }
+                    });
+                }
+            }
+        });
     </script>
 
 {% endblock %}

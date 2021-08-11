@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="MySQL - @localhost">
-  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.21">
+  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.23">
     <root id="1">
       <ServerVersion>10.4.17</ServerVersion>
       <Grants>|root||root|127.0.0.1|ALTER|G
