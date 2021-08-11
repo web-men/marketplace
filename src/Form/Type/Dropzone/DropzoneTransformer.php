@@ -2,13 +2,15 @@
 
 namespace App\Form\Type\Dropzone;
 
+use App\Entity\Img;
 use App\Repository\ImgRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class DropzoneTransformer implements DataTransformerInterface
 {
     public function __construct(
-        private ImgRepository $imgRepository
+        private ImgRepository $imgRepository,
+        private array $options
     ) {
     }
 
@@ -17,8 +19,12 @@ class DropzoneTransformer implements DataTransformerInterface
         //dd($value);
     }
 
-    public function reverseTransform(mixed $value): array
+    public function reverseTransform(mixed $value): array|Img|null
     {
+        if ($this->options['maxFiles'] === 1) {
+            return $this->imgRepository->findOneBy(['id' => $value['dropzone']]);
+        }
+
         return $this->imgRepository->findBy(['id' => $value['dropzone']]);
     }
 }

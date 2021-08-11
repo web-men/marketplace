@@ -5,7 +5,7 @@
             let dropzoneId = '{{ id|default(0) }}Dropzone';
 
             function getHtml(id) {
-                return `<input type="hidden" name="{{ formName }}[{{ name|default(null) }}][dropzone][]" value="${id}">`;
+                return `<input type="hidden" name="{{ full_name }}[dropzone][]" value="${id}">`;
             }
 
             Dropzone['options'][dropzoneId] = {

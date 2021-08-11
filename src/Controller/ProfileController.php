@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Entity\Category;
 use App\Entity\ImgToProduct;
 use App\Entity\Product;
+use App\Entity\ProductCharacteristic;
 use App\Entity\ProductOption;
 use App\Entity\Shop;
 use App\Entity\User;
@@ -75,6 +76,7 @@ class ProfileController extends AbstractController
             $em->flush();
 
             $this->addFlash(self::FLASH_INFO, $t->trans('shop.added'));
+
             return $this->redirectToRoute('_profile');
         }
 
@@ -102,6 +104,7 @@ class ProfileController extends AbstractController
             $em->flush();
 
             $this->addFlash(self::FLASH_INFO, $t->trans('shop.added'));
+
             return $this->redirectToRoute('_profile');
         }
 
@@ -128,6 +131,7 @@ class ProfileController extends AbstractController
             $em->flush();
 
             $this->addFlash(self::FLASH_INFO, $t->trans('address.added'));
+
             return $this->redirectToRoute('_profile');
         }
 
@@ -152,6 +156,7 @@ class ProfileController extends AbstractController
             $em->flush();
 
             $this->addFlash(self::FLASH_INFO, $t->trans('category.added'));
+
             return $this->redirectToRoute('_profile');
         }
 
@@ -164,8 +169,12 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/user/addProduct/{shopId<\d+>}', name: '_profile_addProduct')]
-    public function addProduct(Request $request, EntityManagerInterface $em, TranslatorInterface $t, int $shopId): Response
-    {
+    public function addProduct(
+        Request $request,
+        EntityManagerInterface $em,
+        TranslatorInterface $t,
+        int $shopId
+    ): Response {
         $product = new Product();
         $form = $this->createForm(ProductFormType::class, $product);
 
@@ -175,13 +184,18 @@ class ProfileController extends AbstractController
         if ($shop instanceof Shop && $form->isSubmitted() && $form->isValid()) {
             $product->setShop($shop);
             foreach ($form['options']->getData() as $option) {
-                if($option instanceof ProductOption) {
-                    dd($option->getImg());
+                if ($option instanceof ProductOption) {
                     $option->setProduct($product);
                     $productPrice = $option->getProductPrice();
                     $productPrice->setProduct($product);
                     $em->persist($productPrice);
                     $em->persist($option);
+                }
+            }
+            foreach ($form['characteristics']->getData() as $characteristic) {
+                if ($characteristic instanceof ProductCharacteristic) {
+                    $characteristic->setProduct($product);
+                    $em->persist($characteristic);
                 }
             }
             foreach ($form['images']->getData() as $img) {
@@ -196,6 +210,7 @@ class ProfileController extends AbstractController
             $em->flush();
 
             $this->addFlash(self::FLASH_INFO, $t->trans('product.added'));
+
             return $this->redirectToRoute('_profile_viewShop', ['id' => $shopId]);
         }
 

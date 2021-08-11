@@ -15,15 +15,14 @@ class ProductOptionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('option_images', DropzoneType::class, [
+            ->add('img', DropzoneType::class, [
                 'label' => 'img.add',
                 'attr' => [
                     //Уникальный id нужен будет для загрузки изоброжений
                     'id' => 'imgProductOption'
                 ],
-                'maxFiles' => 3,
-                'addRemoveLinks' => true,
-                'mapped' => false,
+                'maxFiles' => 1,
+                'addRemoveLinks' => true
             ])
             ->add('name', TextType::class, [
                 'label' => 'product.name',
