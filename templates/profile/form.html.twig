@@ -19,6 +19,13 @@
                 form.find('.characteristic_add').remove();
                 formCharacteristic.append(form.html().replaceAll('0', count + 1));
             });
+            $('.option_add').click(function (obj){
+                let formOption =  $(this).parent().parent().parent().parent().parent();
+                let form =  $(this).parent().parent().parent().parent().clone();
+                let count = formOption.children('fieldset').size();
+                form.find('.option_add').remove();
+                formOption.append(form.html().replaceAll('0', count + 1));
+            });
         });
     </script>
 {% endblock %}
