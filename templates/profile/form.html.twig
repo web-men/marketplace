@@ -9,5 +9,17 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+
+    <script>
+        $(function () {
+            $('.characteristic_add').click(function (obj){
+                let formCharacteristic =  $(this).parent().parent().parent().parent().parent();
+                let form =  $(this).parent().parent().parent().parent().clone();
+                let count = formCharacteristic.children('fieldset').size();
+                form.find('.characteristic_add').remove();
+                formCharacteristic.append(form.html().replaceAll('0', count + 1));
+            });
+        });
+    </script>
 {% endblock %}
 
